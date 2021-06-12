@@ -14,6 +14,8 @@
 * Delete an event
 * Messaging (using members in an event as a group)
 * Event details page
+* Climate info page
+* (maybe integrate with insta instead of making our own social media service)
 
 ## Tech Stack
 * Meteor js : full stack framework
