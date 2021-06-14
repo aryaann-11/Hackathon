@@ -12,7 +12,6 @@
 * Join an event
 * Leave an event
 * Delete an event
-* Messaging (using members in an event as a group)
 * Event details page
 * Climate info page
 * (maybe integrate with insta instead of making our own social media service)
@@ -22,5 +21,5 @@
 * React js : frontend framework
 * Mongo DB : database
 * Uploadcare : image CDN
-* Google maps API 
+* Open Street maps
 * IBM climate APIs
