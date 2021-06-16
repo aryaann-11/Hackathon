@@ -9,6 +9,15 @@ import {
   useMapEvents,
   Map,
 } from "react-leaflet";
+import * as L from "leaflet";
+
+const LeafIcon = L.Icon.extend({
+  options: {},
+});
+const greenIcon = new LeafIcon({
+  iconUrl:
+    "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF",
+});
 
 const EventsMap = () => {
   const events = useTracker(() => EventsCollection.find({}).fetch());
@@ -26,7 +35,7 @@ const EventsMap = () => {
             <Marker
               position={[event.position[0], event.position[1]]}
               key={event._id}
-              background-color="green"
+              icon = {greenIcon}
             >
               <Popup>{event.name}</Popup>
             </Marker>
