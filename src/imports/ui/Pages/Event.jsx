@@ -5,6 +5,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
 import Navbar from "../Header/Navbar";
 import Loading from "../Utils/Loading";
+import Info from "./EventInfo";
 
 const EventPage = () => {
   const { isLoading } = useAuth0();
@@ -16,9 +17,10 @@ const EventPage = () => {
   return (
     <>
       <Navbar />
-      <h4>Name: {event.name}</h4>
+      <Info name={event.name} host={event.host} address={event.address}/>
+      {/* <h4>Name: {event.name}</h4>
       <h4>Host: {event.host}</h4>
-      <h4>Address: {event.address}</h4>
+      <h4>Address: {event.address}</h4> */}
     </>
   );
 };

@@ -51,7 +51,7 @@ function LocationMarker() {
 
 const NewEventPage = () => {
   const { user, isLoading } = useAuth0();
-  const events = useTracker(() => EventsCollection.find({}));
+  let events = useTracker(() => EventsCollection.find({}));
   const submitNewEvent = (event) => {
     event.preventDefault();
     const lat = parseFloat(event.target.latitude.value);

@@ -1,6 +1,6 @@
 import React from "react"
 import Navbar from "../Header/Navbar";
-import {useAuth0} from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import AllEventsMap from "../Maps/AllEvents";
 import Loading from "../Utils/Loading";
 import { Home } from "./home";
@@ -23,34 +23,36 @@ const theme = createMuiTheme({
 
 
 export const Root = () => {
-    const {isLoading,isAuthenticated} = useAuth0();
-    // const classes = useStyles();
+  const { isLoading, isAuthenticated } = useAuth0();
+  // const classes = useStyles();
 
 
-    if(isLoading){
-        return(
-            <>
-                <Loading/>
-            </>
-        )
-    }
-    if(!isAuthenticated){
-        return(
-            <>
-            <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <Navbar/>
-            <Home/>
-            </ThemeProvider>
-            </>
-        )
-    }
-    return(
-        <>
-        <CssBaseline/>
-            <Navbar/>
-            <AllEventsMap/>
-        </>
+  if (isLoading) {
+    return (
+      <>
+        <Loading />
+      </>
     )
+  }
+  if (!isAuthenticated) {
+    return (
+      <>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Navbar />
+          <Home />
+        </ThemeProvider>
+      </>
+    )
+  }
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar />
+        <AllEventsMap />
+      </ThemeProvider>
+    </>
+  )
 }
 export default Root;
