@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
 import EventsCollection from "../../db/EventsCollection";
 import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../Utils/Loading";
 
 export default function Info(props) {
   const classes = useStyles();
@@ -17,7 +18,7 @@ export default function Info(props) {
   const address = event.address;
   const _id = event._id;
   const imageurl = event.picUrl;
-  const { user } = useAuth0();
+  const { user,isLoading } = useAuth0();
   const rsvpYes = () => {
     
     var attendees = EventsCollection.findOne({_id:_id}).attendees;
@@ -40,6 +41,11 @@ export default function Info(props) {
     );
     alert("You have RSVPd Yes to this event !");
   };
+  if(isLoading){
+    return(
+      <Loading/>
+    )
+  }
   return (
     <>
       <Grid container direction="row" spacing={3}>

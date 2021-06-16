@@ -10,6 +10,7 @@ import Header from "../Header/Header";
 import "@fontsource/roboto";
 // import useStyles from "./Style";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import MyEvents from "../Events/MyEvents";
 
 const theme = createMuiTheme({
   palette: {
@@ -54,6 +55,10 @@ export const Root = () => {
         {/* <Navbar /> */}
         <Header/>
         <AllEventsMap />
+        <div style={{marginTop:"100px"}}>
+        <MyEvents/>
+        </div>
+        
       </ThemeProvider>
     </>
   );
