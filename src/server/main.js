@@ -1,5 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import EventsCollection from "/imports/db/EventsCollection";
+import UserProfileCollection from "/imports/db/UserProfileCollection";
+
 
 function insertEvent(event){
   EventsCollection.insert(event);
