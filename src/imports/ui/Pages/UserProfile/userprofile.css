@@ -1,0 +1,63 @@
+p{
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .profile{
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0.5px 0.5px 12px rgb(216, 216, 216);
+  }
+  
+  .userEmail, .driveLink{
+    color: rgb(74, 74, 255);
+  }
+  .userEmail, .driveLink:hover{
+    cursor: pointer;
+  }
+  
+  
+  .userAvatar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+  }
+  
+  .basicInfo{
+    padding: 10px;
+  }
+  .basicInfo > .userAvatar{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .editButton{
+    background-color: white;
+    color: blueviolet;
+    border: 2px solid blueviolet;
+    border-radius: 8px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    padding: 8px;
+    align-items: center;
+    vertical-align: middle;
+  }
+  .editButton:hover{
+    /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */
+    background-color: blueviolet;
+    color: white;
+    outline: 0 !important;
+    cursor: pointer;
+  }
+  
+  body:not(.focus-visible) :focus {
+    outline: none;
+  }
+  .heading{
+    text-decoration: underline;
+    /* padding-top : 10px; */
+    padding-bottom : 10px;
+    opacity: 0.9;
+    font-weight: 500;
+  }
