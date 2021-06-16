@@ -14,7 +14,7 @@ export default function Info(props) {
         <div className={classes.container2}>
             <Container>
                 <Paper className={classes.paper}>
-                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" xs={12}>
+                    <Grid container direction="column" justify="flex-start" alignItems="flex-start">
                         <Grid item xs={12} className={classes.paper}>
                             <Typography color='secondary' variant='h6'>NAME :
                                 <Typography>{name}</Typography>
@@ -23,7 +23,7 @@ export default function Info(props) {
                     </Grid>
                 </Paper>
                 <Paper className={classes.paper}>
-                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" xs={12}>
+                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" >
                         <Grid item xs={12} className={classes.paper}>
                             <Typography color='secondary' variant='h6'>VENUE : 
                             <Typography>{address}</Typography>
@@ -32,28 +32,28 @@ export default function Info(props) {
                     </Grid>
                 </Paper>
                 <Paper className={classes.paper}>
-                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" xs={12}>
+                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" >
                         <Grid item xs={12} className={classes.paper}>
                             <Typography color='secondary' variant='h6'>DESCRIPTION : </Typography>
                         </Grid>
                     </Grid>
                 </Paper>
                 <Paper className={classes.paper}>
-                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" xs={12}>
+                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" >
                         <Grid item xs={12} className={classes.paper}>
                             <Typography color='secondary' variant='h6'>DATE AND TIME : </Typography>
                         </Grid>
                     </Grid>
                 </Paper>
                 <Paper className={classes.paper}>
-                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" xs={12}>
+                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" >
                         <Grid item xs={12} className={classes.paper}>
                             <Typography color='secondary' variant='h6'>NOTES : </Typography>
                         </Grid>
                     </Grid>
                 </Paper>
                 <Paper className={classes.paper}>
-                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" xs={12}>
+                    <Grid container direction="column" justify="flex-start" alignItems="flex-start" >
                         <Grid item xs={12} className={classes.paper}>
                             <Typography color='secondary' variant='h6'>HOSTED BY : 
                             <Typography>{host}</Typography>
