@@ -21,5 +21,5 @@
 * React js : frontend framework
 * Mongo DB : database
 * Uploadcare : image CDN
-* Google maps API 
+* Open Street maps
 * IBM climate APIs
