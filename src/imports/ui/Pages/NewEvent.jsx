@@ -14,6 +14,10 @@ import { useTracker } from "meteor/react-meteor-data";
 import axios from "axios";
 import Navbar from "../Header/Navbar";
 import * as L from "leaflet";
+import theme from "../Utils/Theme";
+import { ThemeProvider } from "@material-ui/styles";
+import { Button, CssBaseline, TextField } from "@material-ui/core";
+import { Widget } from "@uploadcare/react-widget";
 
 const LeafIcon = L.Icon.extend({
   options: {},
@@ -51,7 +55,17 @@ function LocationMarker() {
 
 const NewEventPage = () => {
   const { user, isLoading } = useAuth0();
-  const events = useTracker(() => EventsCollection.find({}));
+  let picUrl = "";
+  const onImageUpload = (file) => {
+    if (file) {
+      file.done((info) => {
+        console.log(info.cdnUrl);
+        picUrl = info.cdnUrl;
+      });
+    }
+  };
+
+  let events = useTracker(() => EventsCollection.find({}));
   const submitNewEvent = (event) => {
     event.preventDefault();
     const lat = parseFloat(event.target.latitude.value);
@@ -59,14 +73,23 @@ const NewEventPage = () => {
     const event_name = event.target.event_name.value;
     const position = [lat, lng];
     const address = event.target.address.value;
+    const caption = event.target.pic_caption.value;
     const newEvent = {
       position: position,
       name: event_name,
       host: user.email,
       address: address,
+      picUrl: picUrl,
+      pic_caption: caption,
     };
     console.log(newEvent);
-    EventsCollection.insert(newEvent);
+    EventsCollection.insert(newEvent, function (err) {
+      if (err) {
+        alert(err);
+      } else {
+        alert("Event added successfully !");
+      }
+    });
   };
 
   if (isLoading) {
@@ -75,59 +98,76 @@ const NewEventPage = () => {
 
   return (
     <>
-    <Navbar/>
-      <div>
-        <MapContainer
-          center={[51.505, -0.09]}
-          zoom={15}
-          scrollWheelZoom={false}
-          className="lg-map"
-        >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {events.map((event) => {
-            console.log(event);
-            return (
-              <Marker
-                position={[event.position[0], event.position[1]]}
-                key={event._id}
-                icon={greenIcon}
-              >
-                <Popup>{event.name}</Popup>
-              </Marker>
-            );
-          })}
-          <LocationMarker />
-        </MapContainer>
-      </div>
-      <div>
-        <h4>(click on the map to load latitude and longitude)</h4>
-        <form onSubmit={submitNewEvent}>
-          <div className="mb-3">
-            <input type="hidden" className="form-control" id="latitude" />
+      <ThemeProvider theme={theme}>
+        <CssBaseline>
+          <Navbar />
+          <div>
+            <MapContainer
+              center={[51.505, -0.09]}
+              zoom={15}
+              scrollWheelZoom={false}
+              className="lg-map"
+            >
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {events.map((event) => {
+                console.log(event);
+                return (
+                  <Marker
+                    position={[event.position[0], event.position[1]]}
+                    key={event._id}
+                    icon={greenIcon}
+                  >
+                    <Popup>{event.name}</Popup>
+                  </Marker>
+                );
+              })}
+              <LocationMarker />
+            </MapContainer>
           </div>
-          <div className="mb-3">
-            <input type="hidden" className="form-control" id="longitude" />
+          <div>
+            <h4>(click on the map to load latitude and longitude)</h4>
+            <form onSubmit={submitNewEvent}>
+              <div className="mb-3">
+                <input type="hidden" className="form-control" id="latitude" />
+              </div>
+              <div className="mb-3">
+                <input type="hidden" className="form-control" id="longitude" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="address" className="form-label">
+                  Address
+                </label>
+                <textarea className="form-control" id="address" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="event_name" className="form-label">
+                  Name
+                </label>
+                <input type="text" className="form-control" id="event_name" />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="pic_caption" className="form-label">
+                  Caption
+                </label>
+                <input type="text" className="form-control" id="pic_caption" />
+              </div>
+              <Widget
+                publicKey="ab442d8ac60feea75f87"
+                id="file"
+                onFileSelect={(file) => {
+                  onImageUpload(file);
+                }}
+              />
+              <button type="submit" className="btn btn-primary">
+                Add
+              </button>
+            </form>
           </div>
-          <div className="mb-3">
-            <label htmlFor="address" className="form-label">
-              Address
-            </label>
-            <textarea className="form-control" id="address" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="event_name" className="form-label">
-              Name
-            </label>
-            <input type="text" className="form-control" id="event_name" />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Add
-          </button>
-        </form>
-      </div>
+        </CssBaseline>
+      </ThemeProvider>
     </>
   );
 };

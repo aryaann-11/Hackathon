@@ -5,6 +5,19 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
 import Navbar from "../Header/Navbar";
 import Loading from "../Utils/Loading";
+import { Typography, CssBaseline } from "@material-ui/core";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#ecf0f1",
+    },
+    secondary: {
+      main: "#16a085",
+    },
+  },
+});
 
 const EventPage = () => {
   const { isLoading } = useAuth0();
@@ -15,10 +28,15 @@ const EventPage = () => {
   }
   return (
     <>
-      <Navbar />
-      <h4>Name: {event.name}</h4>
-      <h4>Host: {event.host}</h4>
-      <h4>Address: {event.address}</h4>
+      <ThemeProvider theme={theme}>
+        <CssBaseline>
+          <Navbar />
+          <img src={event.picUrl} alt={event.pic_caption} style={{width:"30%"}}></img>
+          <Typography variant="h6">Name: {event.name}</Typography>
+          <Typography variant="h6">Host: {event.host}</Typography>
+          <Typography variant="p">Address: {event.address}</Typography>
+        </CssBaseline>
+      </ThemeProvider>
     </>
   );
 };

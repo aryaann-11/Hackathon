@@ -2,100 +2,60 @@ import React from "react";
 import LoginButton from "../Auth/LoginButton";
 import LogoutButton from "../Auth/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import { Grid } from "@material-ui/core";
 import "./navbar.css";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 const Navbar = () => {
+  const classes = useStyles();
   const { isAuthenticated } = useAuth0();
   return (
-    <>
-      <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container-fluid nav1">
-          <a className="navbar-brand navB" style={{color: "white", fontWeight: "600"}} href="#">
-            {/* Change font color if required. */}
-            Treefer
-          </a>
-          <button
-            className="navbar-toggler nav-btn"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/new">
-                  New
-                </Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a 
-                  className="nav-link dropdown-toggle navText"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{color: "white", fontWeight: "600"}}
-                >
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#" style={{fontWeight: "400"}}>
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#" style={{fontWeight: "400"}}>
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#" style={{fontWeight: "400"}}>
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a
-                  style={{fontWeight: '600'}}
-                  className="nav-link disabled navText"
-                  href="#"
-                  tabIndex={-1}
-                  aria-disabled="true"
-                  style={{color: "white", fontWeight: "600"}}
-                >
-                  Disabled
-                </a>
-              </li>
-              {isAuthenticated ? (
-                <li className="nav-item">
-                  <LogoutButton />
-                </li>
-              ) : (
-                <li className="nav-item" >
-                  <LoginButton />
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </>
+    <div className={classes.root}>
+      {/* <AppBar position="static"> */}
+        <Toolbar>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Typography
+                variant="h5"
+                className={classes.title}
+                color="secondary"
+              >
+                Treefer
+              </Typography>
+            </Grid>
+
+            <Grid item xs={3} lg={1}>
+              <Link to="/">Home</Link>
+            </Grid>
+            <Grid item xs={3} lg={1}>
+              <Link to="/new">New</Link>
+            </Grid>
+            {isAuthenticated && (
+              <Grid item xs={3} lg={1}>
+                <LogoutButton />
+              </Grid>
+            )}
+          </Grid>
+        </Toolbar>
+      {/* </AppBar> */}
+    </div>
   );
 };
 

@@ -40,6 +40,7 @@ const EventsMap = () => {
             >
               <Popup>
                 <div>
+                  <img src={event.picUrl} alt={event.pic_caption} style={{width:"100px"}}/>
                   <h6> {event.name} </h6>
                   <Link to={"/event/"+event._id}>View</Link>
                 </div>

@@ -1,14 +1,12 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import Button from "@material-ui/core/Button";
 
 const LogoutButton = () => {
   const { logout } = useAuth0();
   return (
     <>
-      <button className="btn btn-dark" onClick={logout}>
-        Logout
-      </button>
+      <Button color="secondary" onClick={logout} variant="contained">Logout</Button>
     </>
   );
 };
