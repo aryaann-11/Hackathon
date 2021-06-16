@@ -25,12 +25,14 @@ export const Root = () => {
   const { isLoading, isAuthenticated } = useAuth0();
   // const classes = useStyles();
 
+
   if (isLoading) {
     return (
       <>
         <Loading />
       </>
     );
+    
   }
   if (!isAuthenticated) {
     return (

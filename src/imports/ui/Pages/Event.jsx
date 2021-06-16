@@ -18,6 +18,7 @@ const theme = createMuiTheme({
     },
   },
 });
+import Info from "./EventInfo";
 
 const EventPage = () => {
   const { isLoading } = useAuth0();
@@ -28,15 +29,8 @@ const EventPage = () => {
   }
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline>
-          <Navbar />
-          <img src={event.picUrl} alt={event.pic_caption} style={{width:"30%"}}></img>
-          <Typography variant="h6">Name: {event.name}</Typography>
-          <Typography variant="h6">Host: {event.host}</Typography>
-          <Typography variant="p">Address: {event.address}</Typography>
-        </CssBaseline>
-      </ThemeProvider>
+      <Navbar />
+      <Info name={event.name} host={event.host} address={event.address}/>
     </>
   );
 };

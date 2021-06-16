@@ -6,7 +6,14 @@ const useStyles = makeStyles((theme)=>({
 
   container: {
     paddingTop: '100px',
-  
+  },
+  container2: {
+    paddingTop: '40px',
+  },
+  paper: {
+    marginBottom:'10px',
+    padding: '2px',
+    textAlign: 'center',
   },
 }));
 
