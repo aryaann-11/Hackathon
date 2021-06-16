@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme)=>({
     height:'100%',
     width:'100%',
     textAlign: 'center',
-    position:'relative'
   }
 }));
 

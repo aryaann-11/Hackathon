@@ -16,7 +16,7 @@ import Loading from "../Utils/Loading";
 const MyEvents = () => {
   const { user, isLoading } = useAuth0();
   const my_events = useTracker(() => {
-    const events= EventsCollection.find({ attendees: user.email }).fetch();
+    const events= EventsCollection.find({$or:[{ attendees: user.email },{host:user.email}]}).fetch();
     console.log(events);
     return events;
   });
