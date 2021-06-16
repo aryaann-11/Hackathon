@@ -7,3 +7,7 @@ body {
   height:400px;
   width:400px;
 }
+.leaflet-container.lg-map{
+  height:500px;
+  width:100%;
+}

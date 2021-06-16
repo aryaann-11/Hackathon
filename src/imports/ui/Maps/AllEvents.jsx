@@ -24,7 +24,7 @@ const EventsMap = () => {
   const count = events.length;
   return (
     <>
-      <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false}>
+      <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false} className="lg-map">
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
