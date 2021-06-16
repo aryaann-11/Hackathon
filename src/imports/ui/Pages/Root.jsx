@@ -1,8 +1,9 @@
 import React from "react"
 import Navbar from "../Header/Navbar";
 import {useAuth0} from "@auth0/auth0-react";
+import AllEventsMap from "../Maps/AllEvents";
 export const Root = () => {
-    const {isLoading} = useAuth0();
+    const {isLoading,isAuthenticated} = useAuth0();
     if(isLoading){
         return(
             <>
@@ -10,10 +11,18 @@ export const Root = () => {
             </>
         )
     }
+    if(!isAuthenticated){
+        return(
+            <>
+            <Navbar/>
+            <h3>Please login to use this app</h3>
+            </>
+        )
+    }
     return(
         <>
             <Navbar/>
-            <h1>This is the root page</h1>
+            <AllEventsMap/>
         </>
     )
 }
