@@ -65,27 +65,32 @@ export default function Info(props) {
             <Typography variant="body1">{address}</Typography>
           </Grid>
           <Grid item md={4} xs={12} align="center">
-        <Typography variant="h6">Starting Date</Typography>
-          <Typography variant="body1">{event.starting_date}</Typography>
+            <Typography variant="h6">Starting Date</Typography>
+            <Typography variant="body1">{event.starting_date}</Typography>
+          </Grid>
+          <Grid item md={4} xs={12} align="center">
+            <Typography variant="h6">Ending Date</Typography>
+            <Typography variant="body1">{event.ending_date}</Typography>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <img
+              src={event.picUrl}
+              alt={event.pic_caption}
+              style={{ width: "100%", marginBottom: "40px" }}
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Typography variant="body1">{event.description}</Typography>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Typography variant="body1">{event.links}</Typography>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Button variant="contained" color="secondary" onClick={rsvpYes}>
+              RSVP Yes
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item md={4} xs={12} align="center">
-        <Typography variant="h6">Ending Date</Typography>
-          <Typography variant="body1">{event.ending_date}</Typography>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} align="center">
-          <img src={event.picUrl} alt={event.pic_caption} style={{width:"100%",marginBottom:"40px"}}/>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} align="center">
-          <Typography variant="body1">{event.description}</Typography>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} align="center">
-          <Typography variant="body1">{event.links}</Typography>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} align="center">
-         <Button variant="contained" color="secondary" onClick={rsvpYes}>RSVP Yes</Button>
-        </Grid>
-        </Grid>
-        
       </Container>
     </>
   );
