@@ -5,7 +5,7 @@ import NewEventPage from "./Pages/NewEvent";
 import EventPage from "./Pages/Event";
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import Drawer from "./Navigation/Drawer";
 const theme = createMuiTheme({
   palette: {
     primary: {

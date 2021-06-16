@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTracker } from "meteor/react-meteor-data";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
-import Navbar from "../Header/Navbar";
+import Header from "../Header/Header";
 import Loading from "../Utils/Loading";
 import { Typography, CssBaseline } from "@material-ui/core";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -29,8 +29,8 @@ const EventPage = () => {
   }
   return (
     <>
-      <Navbar />
-      <Info name={event.name} host={event.host} address={event.address} imageurl={event.picUrl}/>
+      <Header />
+      <Info name={event.name} host={event.host} address={event.address}/>
     </>
   );
 };
