@@ -12,7 +12,7 @@ import {
 } from "react-leaflet";
 import { useTracker } from "meteor/react-meteor-data";
 import axios from "axios";
-import Navbar from "../Header/Navbar";
+import Header from "../Header/Header";
 import * as L from "leaflet";
 import theme from "../Utils/Theme";
 import { ThemeProvider } from "@material-ui/styles";
@@ -100,7 +100,7 @@ const NewEventPage = () => {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline>
-          <Navbar />
+          <Header />
           <div>
             <MapContainer
               center={[51.505, -0.09]}

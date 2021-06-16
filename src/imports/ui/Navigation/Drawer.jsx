@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import { Drawer, Divider, IconButton } from "@material-ui/core";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../Auth/LogoutButton";
@@ -49,7 +49,7 @@ const MaterialDrawer = () => {
             <List>
               <ListItem button key="Home">
                 <ListItemIcon>
-                  <AccountCircleIcon />
+                  <HomeIcon />
                 </ListItemIcon>
                 <ListItemText primary="Home" />
               </ListItem>
@@ -59,19 +59,17 @@ const MaterialDrawer = () => {
             <List>
               <ListItem button key="New Event">
                 <ListItemIcon>
-                  <PermContactCalendarIcon />
+                  <AddCircleOutlineIcon />
                 </ListItemIcon>
                 <ListItemText primary="New Event" />
               </ListItem>
             </List>
           </Link>
-          <Link to="/new" style={styles.link}>
-            <List>
-              <ListItem button key="Logout button">
-                {isAuthenticated && <LogoutButton />}
-              </ListItem>
-            </List>
-          </Link>
+          {isAuthenticated && (
+              <Link to="#" style={styles.link}>
+              <LogoutButton/>
+            </Link>
+          )}
         </Drawer>
       </div>
     </>
