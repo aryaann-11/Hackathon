@@ -2,6 +2,7 @@ import React from "react";
 import LoginButton from "../Auth/LoginButton";
 import LogoutButton from "../Auth/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import {Link} from "react-router-dom";
 const Navbar = () => {
   const { isAuthenticated } = useAuth0();
   return (
@@ -25,14 +26,15 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
+                <div className="nav-link">
+                <Link to="/">Home</Link>
+                </div>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
+                <div className="nav-link">
+                <Link to="/new">New</Link>
+                </div>
+                
               </li>
               <li className="nav-item dropdown">
                 <a
