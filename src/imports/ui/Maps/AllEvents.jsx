@@ -10,6 +10,7 @@ import {
   Map,
 } from "react-leaflet";
 import * as L from "leaflet";
+import {Link} from "react-router-dom"
 
 const LeafIcon = L.Icon.extend({
   options: {},
@@ -37,7 +38,12 @@ const EventsMap = () => {
               key={event._id}
               icon = {greenIcon}
             >
-              <Popup>{event.name}</Popup>
+              <Popup>
+                <div>
+                  <h6> {event.name} </h6>
+                  <Link to={"/event/"+event._id}>View</Link>
+                </div>
+              </Popup>
             </Marker>
           );
         })}
