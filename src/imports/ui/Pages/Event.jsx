@@ -30,7 +30,7 @@ const EventPage = () => {
   return (
     <>
       <Header />
-      <Info name={event.name} host={event.host} address={event.address} imageurl={event.picUrl}/>
+      <Info event={event}/>
     </>
   );
 };
