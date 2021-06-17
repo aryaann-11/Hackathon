@@ -13,9 +13,15 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import {Meteor} from "meteor/meteor";
 
+
 export default function Info(props) {
   const classes = useStyles();
   const event = props.event;
+  if(!event){
+    return(
+      <h1>Event not found</h1>
+    )
+  }
   const name = event.name;
   const host = event.host;
   const address = event.address;
@@ -47,17 +53,17 @@ export default function Info(props) {
         console.log(err);
       } else {
         alert("You have RSVPd Yes to this event !");
+        const msg = "You have RSVPd yes to the event: "+name;
+        Meteor.call("Email.send",user.email,msg,function(err){
+          if(err){
+            alert(err);
+          }
+        })
       }
     });
   };
   const deleteEvent = () => {
-    // EventsCollection.remove({ _id: _id }, function (err) {
-    //   if (err) {
-    //     alert(err);
-    //   } else {
-    //     alert("This event has been deleted");
-    //   }
-    // });
+    
     Meteor.call('Event.delete',_id,user.email,function(err){
       if(err){
         alert(err);

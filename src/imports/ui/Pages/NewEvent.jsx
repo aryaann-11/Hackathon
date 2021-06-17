@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
 import Loading from "../Utils/Loading";
@@ -19,6 +19,11 @@ import theme from "../Utils/Theme";
 import { ThemeProvider } from "@material-ui/styles";
 import { Button, CssBaseline, TextField, Typography } from "@material-ui/core";
 import { Widget } from "@uploadcare/react-widget";
+import {Confirm} from "../userform/components/Confirm";
+import {FormPersonalDetails} from "../userform/components/FormPersonalDetails";
+import {FormUserDetails} from "../userform/components/FormUserDetails";
+import {Success} from "../userform/components/Success";
+import {UserForm} from "../userform/components/UserForm";
 
 const LeafIcon = L.Icon.extend({
   options: {},
@@ -56,6 +61,7 @@ function LocationMarker() {
 
 const NewEventPage = () => {
   const { user, isLoading } = useAuth0();
+  const [formPageNo,setFormPageNo] = useState(1);
   let picUrl = "";
   const onImageUpload = (file) => {
     if (file) {
@@ -108,6 +114,7 @@ const NewEventPage = () => {
       }
     })
   };
+
 
   if (isLoading) {
     return <Loading />;
@@ -241,6 +248,30 @@ const NewEventPage = () => {
           </div>
         </CssBaseline>
       </ThemeProvider>
+
+      {/* <div>
+           {
+             (formPageNo==1)?(
+               <UserForm/>
+             ):(
+               (formPageNo==2)?(
+                 <FormUserDetails/>
+               ):(
+                 (formPageNo==3)?(
+                   <FormPersonalDetails/>
+                 ):(
+                   (formPageNo==4)?(
+                     <Confirm/>
+                   ):(
+                     (formPageNo==5) && <Success/>
+                   )
+                 )
+               )
+             )
+           }
+           <button onClick={()=>setFormPageNo((formPageNo+1)%5)}>Next</button>
+           <button onClick={()=>setFormPageNo((formPageNo-1)%5)}>Prev</button>           
+      </div> */}
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Header/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import AllEventsMap from "../Maps/AllEvents";
 import Loading from "../Utils/Loading";
