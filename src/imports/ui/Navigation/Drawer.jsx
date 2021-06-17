@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import { Drawer, Divider, IconButton } from "@material-ui/core";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import ReorderIcon from "@material-ui/icons/Reorder";
-import HomeIcon from "@material-ui/icons/Home";
+// import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+// import ReorderIcon from "@material-ui/icons/Reorder";
+// import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../Auth/LogoutButton";

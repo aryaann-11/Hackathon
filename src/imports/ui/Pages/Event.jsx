@@ -23,7 +23,7 @@ import Info from "./EventInfo";
 const EventPage = () => {
   const { isLoading } = useAuth0();
   const { event_id } = useParams();
-  const event = useTracker(() => EventsCollection.findOne({ _id: event_id }));
+  const event = useTracker(() => EventsCollection.findOne({ _id: event_id }), []);
   if (isLoading) {
     return <Loading></Loading>;
   }
