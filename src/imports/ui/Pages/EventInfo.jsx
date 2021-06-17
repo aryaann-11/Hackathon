@@ -1,60 +1,117 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import useStyles from './Style';
-import { Button, Container } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import useStyles from "./Style";
+import { Button, Container,red } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
+import Avatar from "@material-ui/core/Avatar";
+import EventsCollection from "../../db/EventsCollection";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../Utils/Loading";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Info(props) {
-    const classes = useStyles();
-    const { name, host, address, imageurl } = props;
-
-    return (
-        <>
-            <Grid container direction="row" spacing={3} >
-                <Grid item xs={12} sm={3}>
-                <div className={classes.root}>
-                    <div className={classes.section1}>
-                        <Typography color="textSecondary" variant="body2">
-                            Hosted by
-                        </Typography>
-                        <Grid container direction="row" alignItems="center">
-                            <Avatar src="/broken-image.jpg" className={classes.small} />
-                            <Grid item>
-                                <Typography gutterBottom variant="h6">
-                                    {host}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </div>
-                    <Divider variant="middle" />
-                    <div className={classes.section2}>
-                        <Typography gutterBottom variant="body2">
-                            Number of Attendees: 54
-                        </Typography>
-                    </div>
-                    <Grid container alignItems="center" >
-                        <Grid item xs={12} className={classes.paper}>
-                            <Button color='secondary' variant='contained'>RSVP</Button>
-                        </Grid>
-                    </Grid>
-                </div>
-                </Grid>
-                {/* <Divider variant="fullWidth" orientation="vertical"></Divider> */}
-                <Grid item xs={12} sm={9}>
-                    <Container className={classes.column} maxWidth='sm'>
-                        <img src={imageurl} width='40%' height='60%'></img>
-                        <Typography variant="h3" gutterBottom>{name}</Typography>
-                        <Typography paragraph>{address}</Typography>
-                        <Typography>21/08/2001 Thursday</Typography>
-                        <Typography gutterBottom>Description</Typography>
-                        <Typography paragraph>{address}</Typography>
-                    </Container>
-                </Grid>
-            </Grid>
-        </>
+  const classes = useStyles();
+  const event = props.event;
+  const name = event.name;
+  const host = event.host;
+  const address = event.address;
+  const _id = event._id;
+  const imageurl = event.picUrl;
+  const attendees = event.attendees;
+  const history = useHistory();
+  const { user, isLoading } = useAuth0();
+  const rsvpYes = () => {
+    var attendees = EventsCollection.findOne({ _id: _id }).attendees;
+    var new_attendees = [];
+    if (!attendees) {
+      new_attendees = [user.email];
+    } else {
+      for (i = 0; i < attendees.length; i++) {
+        if (attendees[i] == user.email) {
+          alert("You have already RSVPd yes to this event");
+          return;
+        }
+      }
+      new_attendees = [...attendees, user.email];
+    }
+    EventsCollection.update(
+      { _id: _id },
+      { $set: { attendees: new_attendees } }
     );
+    alert("You have RSVPd Yes to this event !");
+  };
+  const deleteEvent = () => {
+    EventsCollection.remove({_id:_id},function(err){
+      if(err){
+        alert(err);
+      }
+      else{
+        alert("This event has been deleted");
+      }
+    });
+  }
+  if (isLoading) {
+    return <Loading />;
+  }
+  return (
+    <>
+      <Container maxWidth="md">
+        <Grid container spacing={2}>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Typography variant="h2">{name}</Typography>
+          </Grid>
+          <Grid item md={4} xs={12} align="center">
+            <Typography variant="h6" gutterBottom>
+              Host
+            </Typography>
+            <Typography variant="body1">{host}</Typography>
+          </Grid>
+          <Grid item md={4} xs={12} align="center">
+            <Typography variant="h6">Attendees</Typography>
+            <Typography variant="body1">{attendees.length}</Typography>
+          </Grid>
+          <Grid item md={4} xs={12} align="center">
+            <Typography variant="h6">Venue</Typography>
+            <Typography variant="body1">{address}</Typography>
+          </Grid>
+          <Grid item md={4} xs={12} align="center">
+            <Typography variant="h6">Starting Date</Typography>
+            <Typography variant="body1">{event.starting_date}</Typography>
+          </Grid>
+          <Grid item md={4} xs={12} align="center">
+            <Typography variant="h6">Ending Date</Typography>
+            <Typography variant="body1">{event.ending_date}</Typography>
+          </Grid>
+          {user.email == host && (
+            <Grid item md={4} xs={12} align="center">
+              <Button color="primary" variant="contained" onClick={deleteEvent}>
+                Delete Event
+              </Button>
+            </Grid>
+          )}
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <img
+              src={event.picUrl}
+              alt={event.pic_caption}
+              style={{ width: "100%", marginBottom: "40px" }}
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Typography variant="body1">{event.description}</Typography>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Typography variant="body1">{event.links}</Typography>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} align="center">
+            <Button variant="contained" color="secondary" onClick={rsvpYes}>
+              RSVP Yes
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
+  );
 }

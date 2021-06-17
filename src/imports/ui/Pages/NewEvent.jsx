@@ -74,6 +74,10 @@ const NewEventPage = () => {
     const position = [lat, lng];
     const address = event.target.address.value;
     const caption = event.target.pic_caption.value;
+    const description = event.target.description.value;
+    const starting_date = event.target.starting_date.value;
+    const ending_date = event.target.ending_date.value;
+    const links = event.target.links.value;
     const newEvent = {
       position: position,
       name: event_name,
@@ -81,6 +85,11 @@ const NewEventPage = () => {
       address: address,
       picUrl: picUrl,
       pic_caption: caption,
+      attendees: [],
+      description:description,
+      starting_date:starting_date,
+      ending_date:ending_date,
+      links:links
     };
     console.log(newEvent);
     EventsCollection.insert(newEvent, function (err) {
@@ -128,43 +137,96 @@ const NewEventPage = () => {
             </MapContainer>
           </div>
           <div>
-            <h4>(click on the map to load latitude and longitude)</h4>
-            <form onSubmit={submitNewEvent}>
-              <div className="mb-3">
-                <input type="hidden" className="form-control" id="latitude" />
-              </div>
-              <div className="mb-3">
-                <input type="hidden" className="form-control" id="longitude" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="address" className="form-label">
-                  Address
-                </label>
-                <textarea className="form-control" id="address" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="event_name" className="form-label">
-                  Name
-                </label>
-                <input type="text" className="form-control" id="event_name" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="pic_caption" className="form-label">
-                  Caption
-                </label>
-                <input type="text" className="form-control" id="pic_caption" />
-              </div>
-              <Widget
-                publicKey="ab442d8ac60feea75f87"
-                id="file"
-                onFileSelect={(file) => {
-                  onImageUpload(file);
-                }}
-              />
-              <button type="submit" className="btn btn-primary">
-                Add
-              </button>
-            </form>
+            <div className="col-md-7">
+              <form onSubmit={submitNewEvent}>
+                <div className="mb-3">
+                  <input type="hidden" className="form-control" id="latitude" />
+                </div>
+                <div className="mb-3">
+                  <input
+                    type="hidden"
+                    className="form-control"
+                    id="longitude"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="address" className="form-label">
+                    Address
+                  </label>
+                  <textarea className="form-control" id="address" />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="event_name" className="form-label">
+                    Name
+                  </label>
+                  <input type="text" className="form-control" id="event_name" />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="description" className="form-label">
+                    Description
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="description"
+                    cols="30"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="links" className="form-label">
+                    Important Links
+                  </label>
+                  <textarea className="form-control" id="links" cols="30" />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="pic_caption" className="form-label">
+                    Caption
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="pic_caption"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="starting_date" className="form-label">
+                    Starting Date
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="starting_date"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="ending_date" className="form-label">
+                    Ending Date
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="ending_date"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="imageWidget">
+                    Add picture for event
+                  </label>
+                  <div id="imageWidget">
+                    <Widget
+                      publicKey="ab442d8ac60feea75f87"
+                      id="file"
+                      onFileSelect={(file) => {
+                        onImageUpload(file);
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <button type="submit" className="btn btn-primary">
+                  Add
+                </button>
+              </form>
+            </div>
           </div>
         </CssBaseline>
       </ThemeProvider>
