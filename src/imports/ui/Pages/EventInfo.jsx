@@ -54,7 +54,7 @@ export default function Info(props) {
       } else {
         alert("You have RSVPd Yes to this event !");
         const msg = "You have RSVPd yes to the event: "+name;
-        Meteor.call("Email.send",user.email,msg,function(err){
+        Meteor.call("Email.send",user.email,'RSVP event',msg,function(err){
           if(err){
             alert(err);
           }
