@@ -17,7 +17,7 @@ import Header from "../Header/Header";
 import * as L from "leaflet";
 import theme from "../Utils/Theme";
 import { ThemeProvider } from "@material-ui/styles";
-import { Button, CssBaseline, TextField } from "@material-ui/core";
+import { Button, CssBaseline, TextField, Typography } from "@material-ui/core";
 import { Widget } from "@uploadcare/react-widget";
 
 const LeafIcon = L.Icon.extend({
@@ -118,6 +118,9 @@ const NewEventPage = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline>
           <Header />
+          <div style={{marginTop:"50px", marginBotton:"50px"}}>
+          <Typography variant="h2" align="center">Create Events</Typography>
+        </div>
           <div>
             <MapContainer
               center={[51.505, -0.09]}

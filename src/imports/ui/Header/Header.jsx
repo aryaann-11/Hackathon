@@ -13,6 +13,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Drawer from "../Navigation/Drawer";
 import Navbar from "../Header/Navbar";
 import "./navbar.css";
+import { Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -30,12 +33,13 @@ const Header = () => {
   return (
     <div className={classes.root}>
       {/* <AppBar position="static"> */}
-        <Toolbar>
-            <div style={{marginTop:'50px'}}>
-            <Drawer/>
+      <Toolbar>
+        
+            <div style={{ marginTop: '50px' }}>
+              <Drawer />
             </div>
-         
-        </Toolbar>
+          
+      </Toolbar>
       {/* </AppBar> */}
     </div>
   );
