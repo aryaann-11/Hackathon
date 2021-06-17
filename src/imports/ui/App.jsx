@@ -3,6 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import RootPage from "./Pages/Root";
 import NewEventPage from "./Pages/NewEvent";
 import EventPage from "./Pages/Event";
+import UserProfilePage from "./Pages/UserProfile/UserProfile";
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Drawer from "./Navigation/Drawer";
@@ -29,6 +30,9 @@ export const App = () => (
         </Route>
         <Route path="/event/:event_id" exact>
           <EventPage />
+        </Route>
+        <Route path="/profile" exact>
+          <UserProfilePage/>
         </Route>
       </Switch>
     </ThemeProvider>

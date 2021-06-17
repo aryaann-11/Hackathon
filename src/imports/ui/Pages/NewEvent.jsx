@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
 import Loading from "../Utils/Loading";
+import {Meteor} from "meteor/meteor";
 import {
   MapContainer,
   TileLayer,
@@ -16,8 +17,13 @@ import Header from "../Header/Header";
 import * as L from "leaflet";
 import theme from "../Utils/Theme";
 import { ThemeProvider } from "@material-ui/styles";
-import { Button, CssBaseline, TextField } from "@material-ui/core";
+import { Button, CssBaseline, TextField, Typography } from "@material-ui/core";
 import { Widget } from "@uploadcare/react-widget";
+import {Confirm} from "../userform/components/Confirm";
+import {FormPersonalDetails} from "../userform/components/FormPersonalDetails";
+import {FormUserDetails} from "../userform/components/FormUserDetails";
+import {Success} from "../userform/components/Success";
+import {UserForm} from "../userform/components/UserForm";
 
 const LeafIcon = L.Icon.extend({
   options: {},
@@ -55,6 +61,7 @@ function LocationMarker() {
 
 const NewEventPage = () => {
   const { user, isLoading } = useAuth0();
+  const [formPageNo,setFormPageNo] = useState(1);
   let picUrl = "";
   const onImageUpload = (file) => {
     if (file) {
@@ -65,7 +72,15 @@ const NewEventPage = () => {
     }
   };
 
-  let events = useTracker(() => EventsCollection.find({}));
+  const isContentLoading = false;
+  const events = useTracker(()=>{
+    const handler = Meteor.subscribe("Events");
+    if(!handler.ready){
+      isContentLoading = true;
+    }
+    return EventsCollection.find({}).fetch();
+  })
+
   const submitNewEvent = (event) => {
     event.preventDefault();
     const lat = parseFloat(event.target.latitude.value);
@@ -92,16 +107,24 @@ const NewEventPage = () => {
       links:links
     };
     console.log(newEvent);
-    EventsCollection.insert(newEvent, function (err) {
-      if (err) {
+    // EventsCollection.insert(newEvent, function (err) {
+    //   if (err) {
+    //     alert(err);
+    //   } else {
+    //     alert("Event added successfully !");
+    //   }
+    // });
+    Meteor.call('Events.insert',newEvent,function(err){
+      if(err){
         alert(err);
-      } else {
-        alert("Event added successfully !");
+      }else{
+        alert('Event added successfully !');
       }
-    });
+    })
   };
 
-  if (isLoading) {
+
+  if (isLoading || isContentLoading) {
     return <Loading />;
   }
 
@@ -110,6 +133,9 @@ const NewEventPage = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline>
           <Header />
+          <div style={{marginTop:"50px", marginBotton:"50px"}}>
+          <Typography variant="h2" align="center">Create Events</Typography>
+        </div>
           <div>
             <MapContainer
               center={[51.505, -0.09]}
@@ -230,6 +256,30 @@ const NewEventPage = () => {
           </div>
         </CssBaseline>
       </ThemeProvider>
+
+      {/* <div>
+           {
+             (formPageNo==1)?(
+               <UserForm/>
+             ):(
+               (formPageNo==2)?(
+                 <FormUserDetails/>
+               ):(
+                 (formPageNo==3)?(
+                   <FormPersonalDetails/>
+                 ):(
+                   (formPageNo==4)?(
+                     <Confirm/>
+                   ):(
+                     (formPageNo==5) && <Success/>
+                   )
+                 )
+               )
+             )
+           }
+           <button onClick={()=>setFormPageNo((formPageNo+1)%5)}>Next</button>
+           <button onClick={()=>setFormPageNo((formPageNo-1)%5)}>Prev</button>           
+      </div> */}
     </>
   );
 };

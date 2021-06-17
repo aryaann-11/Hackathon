@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "../Header/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import AllEventsMap from "../Maps/AllEvents";
 import Loading from "../Utils/Loading";
 import { Home } from "./home";
 import { CssBaseline } from "@material-ui/core";
 import Header from "../Header/Header";
-// import { Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import "@fontsource/roboto";
 // import useStyles from "./Style";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -42,7 +41,7 @@ export const Root = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {/* <Navbar /> */}
-          <Header/>
+         
           <Home />
         </ThemeProvider>
       </>
@@ -54,6 +53,9 @@ export const Root = () => {
         <CssBaseline />
         {/* <Navbar /> */}
         <Header/>
+        <div style={{marginTop:"50px", marginBotton:"50px"}}>
+          <Typography variant="h2" align="center">Upcoming Events</Typography>
+        </div>
         <AllEventsMap />
         <div style={{marginTop:"100px"}}>
         <MyEvents/>

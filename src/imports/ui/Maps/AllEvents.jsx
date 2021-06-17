@@ -21,6 +21,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import {Meteor} from "meteor/meteor";
 const LeafIcon = L.Icon.extend({
   options: {},
 });
@@ -30,7 +31,14 @@ const greenIcon = new LeafIcon({
 });
 
 const EventsMap = () => {
-  const events = useTracker(() => EventsCollection.find({}).fetch());
+  const isContentLoading = false;
+  const events = useTracker(() => {
+    const handler = Meteor.subscribe("Events");
+    if (!handler.ready) {
+      isContentLoading = true;
+    }
+    return EventsCollection.find({}).fetch();
+  });
   const { isLoading } = useAuth0();
   const count = events.length;
   const classes = makeStyles({
@@ -42,9 +50,10 @@ const EventsMap = () => {
       height: 70,
     },
   });
-  if (isLoading) {
+  if (isLoading || isContentLoading) {
     return <Loading></Loading>;
   }
+
   return (
     <>
       <MapContainer
