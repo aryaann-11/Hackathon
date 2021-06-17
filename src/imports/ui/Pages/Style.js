@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme)=>({
 
   container: {
     paddingTop: '100px',
+    height: '100vh',
+    background: 'linear-gradient(to right, #8bc34a , #c5e1a5 )'
   },
   container2: {
     paddingTop: '40px',
@@ -46,6 +48,10 @@ const useStyles = makeStyles((theme)=>({
     height:'100%',
     width:'100%',
     textAlign: 'center',
+  },
+  treeimg: {
+    height: '500',
+    width: '500',
   }
 }));
 
