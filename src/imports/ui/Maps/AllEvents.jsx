@@ -10,8 +10,17 @@ import {
   Map,
 } from "react-leaflet";
 import * as L from "leaflet";
-import {Link} from "react-router-dom"
-
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../Utils/Loading";
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
 const LeafIcon = L.Icon.extend({
   options: {},
 });
@@ -22,10 +31,28 @@ const greenIcon = new LeafIcon({
 
 const EventsMap = () => {
   const events = useTracker(() => EventsCollection.find({}).fetch());
+  const { isLoading } = useAuth0();
   const count = events.length;
+  const classes = makeStyles({
+    root: {
+      maxWidth: 145,
+      spacing: 4,
+    },
+    media: {
+      height: 70,
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <>
-      <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false} className="lg-map">
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={15}
+        scrollWheelZoom={false}
+        className="lg-map"
+      >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -36,14 +63,23 @@ const EventsMap = () => {
             <Marker
               position={[event.position[0], event.position[1]]}
               key={event._id}
-              icon = {greenIcon}
+              icon={greenIcon}
             >
               <Popup>
-                <div>
-                  <img src={event.picUrl} alt={event.pic_caption} style={{width:"100px"}}/>
-                  <h6> {event.name} </h6>
-                  <Link to={"/event/"+event._id}>View</Link>
-                </div>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      src={event.picUrl}
+                      className={classes.media}
+                    />
+                    <CardContent>
+                      <Typography variant="body2" component="p" gutterBottom>
+                        <Link to={"/event/" + event._id}>{event.name}</Link>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
               </Popup>
             </Marker>
           );
