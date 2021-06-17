@@ -42,7 +42,7 @@ export const Root = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {/* <Navbar /> */}
-          <Header/>
+         
           <Home />
         </ThemeProvider>
       </>
