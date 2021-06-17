@@ -3,12 +3,15 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./Style";
-import { Button, Container } from "@material-ui/core";
+import { Button, Container, red } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
 import EventsCollection from "../../db/EventsCollection";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../Utils/Loading";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import {Meteor} from "meteor/meteor";
 
 export default function Info(props) {
   const classes = useStyles();
@@ -19,6 +22,7 @@ export default function Info(props) {
   const _id = event._id;
   const imageurl = event.picUrl;
   const attendees = event.attendees;
+  const history = useHistory();
   const { user, isLoading } = useAuth0();
   const rsvpYes = () => {
     var attendees = EventsCollection.findOne({ _id: _id }).attendees;
@@ -34,11 +38,33 @@ export default function Info(props) {
       }
       new_attendees = [...attendees, user.email];
     }
-    EventsCollection.update(
-      { _id: _id },
-      { $set: { attendees: new_attendees } }
-    );
-    alert("You have RSVPd Yes to this event !");
+    // EventsCollection.update(
+    //   { _id: _id },
+    //   { $set: { attendees: new_attendees } }
+    // );
+    Meteor.call("Event.rsvpYes", _id, new_attendees, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        alert("You have RSVPd Yes to this event !");
+      }
+    });
+  };
+  const deleteEvent = () => {
+    // EventsCollection.remove({ _id: _id }, function (err) {
+    //   if (err) {
+    //     alert(err);
+    //   } else {
+    //     alert("This event has been deleted");
+    //   }
+    // });
+    Meteor.call('Event.delete',_id,user.email,function(err){
+      if(err){
+        alert(err);
+      }else{
+        alert('This event has been deleted');
+      }
+    })
   };
   if (isLoading) {
     return <Loading />;
@@ -72,6 +98,13 @@ export default function Info(props) {
             <Typography variant="h6">Ending Date</Typography>
             <Typography variant="body1">{event.ending_date}</Typography>
           </Grid>
+          {user.email == host && (
+            <Grid item md={4} xs={12} align="center">
+              <Button color="primary" variant="contained" onClick={deleteEvent}>
+                Delete Event
+              </Button>
+            </Grid>
+          )}
           <Grid item lg={12} md={12} sm={12} xs={12} align="center">
             <img
               src={event.picUrl}

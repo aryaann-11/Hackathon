@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
 import Loading from "../Utils/Loading";
+import {Meteor} from "meteor/meteor";
 import {
   MapContainer,
   TileLayer,
@@ -16,7 +17,7 @@ import Header from "../Header/Header";
 import * as L from "leaflet";
 import theme from "../Utils/Theme";
 import { ThemeProvider } from "@material-ui/styles";
-import { Button, CssBaseline, TextField } from "@material-ui/core";
+import { Button, CssBaseline, TextField, Typography } from "@material-ui/core";
 import { Widget } from "@uploadcare/react-widget";
 
 const LeafIcon = L.Icon.extend({
@@ -92,13 +93,20 @@ const NewEventPage = () => {
       links:links
     };
     console.log(newEvent);
-    EventsCollection.insert(newEvent, function (err) {
-      if (err) {
+    // EventsCollection.insert(newEvent, function (err) {
+    //   if (err) {
+    //     alert(err);
+    //   } else {
+    //     alert("Event added successfully !");
+    //   }
+    // });
+    Meteor.call('Events.insert',newEvent,function(err){
+      if(err){
         alert(err);
-      } else {
-        alert("Event added successfully !");
+      }else{
+        alert('Event added successfully !');
       }
-    });
+    })
   };
 
   if (isLoading) {
@@ -110,6 +118,9 @@ const NewEventPage = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline>
           <Header />
+          <div style={{marginTop:"50px", marginBotton:"50px"}}>
+          <Typography variant="h2" align="center">Create Events</Typography>
+        </div>
           <div>
             <MapContainer
               center={[51.505, -0.09]}

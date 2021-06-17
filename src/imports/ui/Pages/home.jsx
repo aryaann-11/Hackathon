@@ -8,14 +8,14 @@ import LoginButton from "../Auth/LoginButton";
 export const Home = () => {
   const classes = useStyles();
   return (
-
     <div className={classes.container}>
-      {<Container maxWidth="sm">
+      <Container maxWidth="sm">
         <Grid container spacing={3}>
-          <Grid item xs={12} lg={12} align="center">
+          <Grid item xs={4} lg={4} align="center">
             <Typography
-              align="center"
-              variant="h2"
+              align="left"
+              variant="h1"
+              fontSize="24"
               color="secondary"
               gutterBottom
             >
@@ -30,24 +30,10 @@ export const Home = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} lg={12} align="center">
-            <LoginButton />
+            <LoginButton/>
           </Grid>
         </Grid>
-      </Container>}
-
-      {/* <div className="container">
-                    <div className="row">
-
-                        <div className="col-4">
-                            <div style={{ fontSize="26", fontWeight="700" }}>
-                                <h1>TREEFER</h1>
-                            </div>
-                        </div>
-                        <div className="col-8"></div>
-
-                    </div>
-                </div> */}
+      </Container>
     </div>
-
   );
 };

@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Drawer, Divider, IconButton } from "@material-ui/core";
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemIcon, ListItemText, Typography, Grid } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import HomeIcon from "@material-ui/icons/Home";
@@ -13,17 +13,18 @@ const styles = {
   sideNav: {
     marginTop: "-60px",
     zIndex: 3,
-    marginLeft: "0px",
+    marginLeft: "-30px",
     position: "fixed",
   },
   link: {
     color: "black",
     textDecoration: "none",
   },
+
 };
 
 const MaterialDrawer = () => {
-  const [ isDrawerOpened, setIsDrawerOpened ] = useState(false);
+  const [isDrawerOpened, setIsDrawerOpened] = useState(false);
   const { isAuthenticated } = useAuth0();
   const toggleDrawerStatus = () => {
     setIsDrawerOpened(true);
@@ -35,10 +36,18 @@ const MaterialDrawer = () => {
     <>
       <div>
         <div style={styles.sideNav}>
-          <IconButton onClick={toggleDrawerStatus}>
-            {!isDrawerOpened ? <ReorderIcon /> : null}
-          </IconButton>
+          <Grid container alignItems="center" >
+            <Grid item>
+              <IconButton onClick={toggleDrawerStatus}>
+                {!isDrawerOpened ? (<><ReorderIcon /></>) : (null)}
+              </IconButton>
+            </Grid>
+            <Grid item >
+              {!isDrawerOpened && <Typography variant="h5" color='secondary'>Treefer</Typography>}
+            </Grid>
+          </Grid>
         </div>
+
         <Divider />
         <Drawer
           variant="temporary"
@@ -66,8 +75,8 @@ const MaterialDrawer = () => {
             </List>
           </Link>
           {isAuthenticated && (
-              <Link to="#" style={styles.link}>
-              <LogoutButton/>
+            <Link to="#" style={styles.link}>
+              <LogoutButton />
             </Link>
           )}
         </Drawer>
