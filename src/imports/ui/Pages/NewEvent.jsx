@@ -72,7 +72,15 @@ const NewEventPage = () => {
     }
   };
 
-  let events = useTracker(() => EventsCollection.find({}));
+  const isContentLoading = false;
+  const events = useTracker(()=>{
+    const handler = Meteor.subscribe("Events");
+    if(!handler.ready){
+      isContentLoading = true;
+    }
+    return EventsCollection.find({}).fetch();
+  })
+
   const submitNewEvent = (event) => {
     event.preventDefault();
     const lat = parseFloat(event.target.latitude.value);
@@ -116,7 +124,7 @@ const NewEventPage = () => {
   };
 
 
-  if (isLoading) {
+  if (isLoading || isContentLoading) {
     return <Loading />;
   }
 

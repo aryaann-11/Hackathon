@@ -13,9 +13,15 @@ import {
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Loading from "../Utils/Loading";
+import {Meteor} from "meteor/meteor";
 const MyEvents = () => {
   const { user, isLoading } = useAuth0();
+  const isContentLoading = false;
   const my_events = useTracker(() => {
+    const handler = Meteor.subscribe("Events");
+    if(!handler.ready){
+      isContentLoading = true;
+    }
     const events= EventsCollection.find({$or:[{ attendees: user.email },{host:user.email}]}).fetch();
     console.log(events);
     return events;
@@ -29,7 +35,7 @@ const MyEvents = () => {
       height: 100
     },
   });
-  if (isLoading) {
+  if (isLoading || isContentLoading) {
     return <Loading />;
   }
   return (
