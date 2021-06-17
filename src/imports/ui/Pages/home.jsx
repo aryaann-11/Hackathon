@@ -24,8 +24,8 @@ export const Home = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} lg={12} align="center">
-            <Typography align="center" fontWeight="600" component="p">
-              <Box color="">
+            <Typography align="center"  component="p">
+              <Box fontWeight="600">
                 "A place to find 'green-minded' people and events from all around
                 the world. A place where you can take your first step and initiate
                 a drive to make our Earth a better place to live in!"
