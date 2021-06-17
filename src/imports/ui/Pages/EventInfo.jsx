@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./Style";
-import { Button, Container,red } from "@material-ui/core";
+import { Button, Container, red } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
 import EventsCollection from "../../db/EventsCollection";
@@ -11,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../Utils/Loading";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import {Meteor} from "meteor/meteor";
 
 export default function Info(props) {
   const classes = useStyles();
@@ -37,22 +38,34 @@ export default function Info(props) {
       }
       new_attendees = [...attendees, user.email];
     }
-    EventsCollection.update(
-      { _id: _id },
-      { $set: { attendees: new_attendees } }
-    );
-    alert("You have RSVPd Yes to this event !");
-  };
-  const deleteEvent = () => {
-    EventsCollection.remove({_id:_id},function(err){
-      if(err){
-        alert(err);
-      }
-      else{
-        alert("This event has been deleted");
+    // EventsCollection.update(
+    //   { _id: _id },
+    //   { $set: { attendees: new_attendees } }
+    // );
+    Meteor.call("Event.rsvpYes", _id, new_attendees, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        alert("You have RSVPd Yes to this event !");
       }
     });
-  }
+  };
+  const deleteEvent = () => {
+    // EventsCollection.remove({ _id: _id }, function (err) {
+    //   if (err) {
+    //     alert(err);
+    //   } else {
+    //     alert("This event has been deleted");
+    //   }
+    // });
+    Meteor.call('Event.delete',_id,user.email,function(err){
+      if(err){
+        alert(err);
+      }else{
+        alert('This event has been deleted');
+      }
+    })
+  };
   if (isLoading) {
     return <Loading />;
   }

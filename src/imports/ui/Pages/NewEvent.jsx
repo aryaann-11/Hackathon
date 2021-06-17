@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import EventsCollection from "../../db/EventsCollection";
 import Loading from "../Utils/Loading";
+import {Meteor} from "meteor/meteor";
 import {
   MapContainer,
   TileLayer,
@@ -92,13 +93,20 @@ const NewEventPage = () => {
       links:links
     };
     console.log(newEvent);
-    EventsCollection.insert(newEvent, function (err) {
-      if (err) {
+    // EventsCollection.insert(newEvent, function (err) {
+    //   if (err) {
+    //     alert(err);
+    //   } else {
+    //     alert("Event added successfully !");
+    //   }
+    // });
+    Meteor.call('Events.insert',newEvent,function(err){
+      if(err){
         alert(err);
-      } else {
-        alert("Event added successfully !");
+      }else{
+        alert('Event added successfully !');
       }
-    });
+    })
   };
 
   if (isLoading) {
