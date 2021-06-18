@@ -16,7 +16,7 @@ Climate change increasingly poses one of the biggest long term threats to our so
 Treefer is a web app that aims to bring about a positive change for the betterment of the environment.It aims to satisfy the 13th sustainable development goal of ‘Climate Action’. Through our web app we aim to identify regions where environmental drives are being conducted. Users can RSVP to the drives they wish to be a part of. (For example - Cleaning drive, ploggathons, tree plantation drives, painting to beautify the polluted infrastructure, etc). A user can also initiate a drive by creating his/her own event. 
 
 ## Demo video
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://imgur.com/PkBTSYS.jpg)](https://youtu.be/lDg6iY2jLBo)
 
 ## Long Description 
 Climate change, if left unchecked, poses a fatal threat to the ecological system as well as human civilization. According to a 2018 report of the United Nations Intergovernmental Panel on climate change, the worst impacts of climate change could be irreversible by 2030. Owing to this, it becomes essential for us , as citizens, to come forward and take active steps in saving our planet.It aims to satisfy the 13th sustainable development goal of ‘Climate Action’.
@@ -54,4 +54,14 @@ In the period of Wit hackathon, we have implemented the following features :
 - Material Ui
 - IBM Cloud Foundry 
 
+## Getting started 
+Clone the git repositiory and cd into the directory. Then run 
+```sh
+$ cd src 
+```
+Then use the following command to run the web app locally
+```
+$ meteor run --settings settings.json
+```
+The web app will now run at localhost:3000.
 
