@@ -1,0 +1,3 @@
+ {
+     "MONGO_URL":"mongodb+srv://aryan:aryan@cluster0.yx4lx.mongodb.net/treefer?retryWrites=true&w=majority"
+ }

@@ -1,6 +1,5 @@
 import {Mongo} from "meteor/mongo";
 
+const ProfileCollection = new Mongo.Collection("Profiles");
 
-const UserProfileCollection = new Mongo.Collection('Profiles');
-
-export default UserProfileCollection;
+export default ProfileCollection;
