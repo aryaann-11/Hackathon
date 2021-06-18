@@ -1,0 +1,5 @@
+applications:
+- name: treefer
+  random-route: true
+  memory: 128M
+  MONGO_URL: mongodb+srv://aryan:aryan@cluster0.yx4lx.mongodb.net/treefer?retryWrites=true&w=majority
