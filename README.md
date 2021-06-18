@@ -20,14 +20,14 @@ Treefer is a web app that aims to bring about a positive change for the betterme
 
 ## Long Description 
 Climate change, if left unchecked, poses a fatal threat to the ecological system as well as human civilization. According to a 2018 report of the United Nations Intergovernmental Panel on climate change, the worst impacts of climate change could be irreversible by 2030. Owing to this, it becomes essential for us , as citizens, to come forward and take active steps in saving our planet.It aims to satisfy the 13th sustainable development goal of ‘Climate Action’.
-	Fortunately,  there are various organizations , clubs and communities that conduct regular drives to contribute to protect our environment. These vary from cleanliness drives to tree plantation drives and so on. However, these are not easily accessible to the general public because of lack of targeted publicity or scattered and individual sources providing information about their drives. 
- 	Hence , we propose ‘Treefer’. Treefer is a web application that aims to solve the above mentioned problems and provide one easy to use platform. Through the web app, we aim to display environmental promotional drives near the user’s location.The user first has to login to our web app and is directed to a google authentication sign up page.There he/she has to sign up and login by providing his/her email and password.
+	Fortunately, there are various organizations, clubs and communities that conduct regular drives to contribute to protect our environment. These vary from cleanliness drives to tree plantation drives and so on. Howeve, these are not easily accessible to the general public because of lack of targeted publicity or scattered and individual sources providing information about their drives. 
+ 	Hence, we propose ‘Treefer’.Treefer is a web application that aims to solve the above mentioned problems and provide one easy to use platform. Through the web app, we aim to display environmental promotional drives near the user’s location.The user first has to login to our web app and is directed to a google authentication sign up page.There he/she has to sign up and login by providing his/her email and password.
 The user can then book an event that is close to his area/region which he can easily locate through the map functionality. Additionally, he/she may also choose to host an event through our platform.
 	The user has to register or sign up for the event by providing details like the name of the event, address, start date of event, end date of event.We have added a facility wherein the user can upload his/her photos/documents from gallery, google drive or even social media platforms like facebook and instagram.
 Another useful feature that we have added is the RSVP of an event once the user has registered for that  particular event.An acknowledgement mail would be sent to him/her once the registration of the particular event has been carried out successfully.
 
 ### Future aspects 
-- Social media aspect 
+- Expand the social media component.
 - Gamify the website. Give user’s incentives for using our website like organizing competitions giving free coupons
 - Building an easier to use application.
 - Adding climate related articles and content 
