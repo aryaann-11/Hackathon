@@ -42,4 +42,16 @@ In the period of Wit hackathon, we have implemented the following features :
 - See the total number attendees of an event 
 - Get a log of your own events and the ones you have RSVPed for
 
+![Treefer Roadmap](https://github.com/aryaann-11/Hackathon/blob/main/Docs/Treefer%20Roadmap.png?raw=true)
+
+## Built with 
+- Meteor js 
+- Mongodb 
+- Auth0 
+- UploadCare
+- OpenStreetMap
+- React js
+- Material Ui
+- IBM Cloud Foundry 
+
 
